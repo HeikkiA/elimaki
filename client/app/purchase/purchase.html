@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Purchases</h1>
+
+      <form name="purchaseForm" ng-submit="addPurchase()">
+        <div class="form-group">
+          <label>Amount</label>
+          <input type="number" min="0" step="0.01" name="amount" class="form-control" ng-model="newPurchase.amount" required>
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select class="form-control"
+            ng-model="newPurchase.category"
+            ng-options="category._id as category.name for category in categories"
+            required>
+            <option value="" ng-hide="newPurchase.category">Choose category</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea class="form-control" ng-model="newPurchase.description" required></textarea>
+        </div>
+        <div class="form-group">
+          <label>Participants</label>
+          <select class="form-control"
+            ng-model="newPurchase.participants"
+            ng-options="user._id as user.name for user in users"
+            multiple required>
+            <option value="" ng-hide="newPurchase.participants">Choose participants</option>
+          </select>
+        </div>
+        <button class="btn btn-lg btn-primary" type="submit" ng-disabled="purchaseForm.$invalid">Add purchase</button>
+      </form>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>
+              <a href="#" ng-click="sort.by = 'author'; sort.reverse = !sort.reverse">
+                Author
+                <span ng-show="sort.by == 'author' && !sort.reverse" class="fa fa-caret-down"></span>
+                <span ng-show="sort.by == 'author' && sort.reverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+            <th>
+              <a href="#" ng-click="sort.by = 'amount'; sort.reverse = !sort.reverse">
+                Amount
+                <span ng-show="sort.by == 'amount' && !sort.reverse" class="fa fa-caret-down"></span>
+                <span ng-show="sort.by == 'amount' && sort.reverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+            <th>
+              <a href="#" ng-click="sort.by = 'category'; sort.reverse = !sort.reverse">
+                Category
+                <span ng-show="sort.by == 'category' && !sort.reverse" class="fa fa-caret-down"></span>
+                <span ng-show="sort.by == 'category' && sort.reverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Participants
+            </th>
+            <th>
+              <a href="#" ng-click="sort.by = 'created'; sort.reverse = !sort.reverse">
+                Created
+                <span ng-show="sort.by == 'created' && !sort.reverse" class="fa fa-caret-down"></span>
+                <span ng-show="sort.by == 'created' && sort.reverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="purchase in purchases | orderBy:sort.by:sort.reverse">
+            <td ng-bind="purchase.author.name"></td>
+            <td ng-bind="purchase.amount"></td>
+            <td ng-bind="purchase.category.name"></td>
+            <td ng-bind="purchase.description"></td>
+            <td>
+              <span ng-repeat="user in purchase.participants">{{user.name}}{{$last ? '' : ', '}}</span>
+            </td>
+            <td ng-bind="purchase.created | date: 'dd.MM.yyyy hh:mm'"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

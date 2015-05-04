@@ -1,0 +1,8 @@
+.sass-cache
+.tmp
+client/bower_components
+node_modules
+public
+.idea
+dist
+/server/config/local.env.js

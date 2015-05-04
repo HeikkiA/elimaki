@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Users</h1>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>
+              <a href="#" ng-click="sort.by = 'name'; sort.reverse = !sort.reverse">
+                Name
+                <span ng-show="sort.by == 'name' && !sort.reverse" class="fa fa-caret-down"></span>
+                <span ng-show="sort.by == 'name' && sort.reverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+            <th>
+              <a href="#" ng-click="sort.by = 'email'; sort.reverse = !sort.reverse">
+                Email
+                <span ng-show="sort.by == 'email' && !sort.reverse" class="fa fa-caret-down"></span>
+                <span ng-show="sort.by == 'email' && sort.reverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+            <th>
+              <a href="#" ng-click="sort.by = 'iban'; sort.reverse = !sort.reverse">
+                IBAN
+                <span ng-show="sort.by == 'iban' && !sort.reverse" class="fa fa-caret-down"></span>
+                <span ng-show="sort.by == 'iban' && sort.reverse" class="fa fa-caret-up"></span>
+              </a>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in users | orderBy:sort.by:sort.reverse">
+            <td ng-bind="user.name"></td>
+            <td ng-bind="user.email"></td>
+            <td ng-bind="user.iban"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
