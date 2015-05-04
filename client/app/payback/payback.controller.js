@@ -17,7 +17,7 @@ angular.module('kulutApp')
     $http.get('/api/users').success(function(users) {
       $scope.users = users.filter(function(user) {
         return user._id !== Auth.getCurrentUser()._id;
-      });;
+      });
       socket.syncUpdates('user', $scope.users);
     });
 

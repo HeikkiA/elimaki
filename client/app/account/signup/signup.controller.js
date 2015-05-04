@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('kulutApp')
-  .controller('SignupCtrl', function ($scope, Auth, $location) {
+  .controller('SignupCtrl', function ($scope, Auth) {
     $scope.user = {};
     $scope.errors = {};
 
