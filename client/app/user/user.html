@@ -1,4 +1,41 @@
 <div class="container">
+
+  <div ng-if="isAdmin()" class="row">
+    <div class="col-sm-12">
+      <h1>Add user</h1>
+    </div>
+    <div class="col-sm-12">
+      <form class="form" name="form" ng-submit="register(form)" novalidate>
+        <div class="form-group">
+          <label>Display Name</label>
+          <input type="text" name="displayName" class="form-control" ng-model="user.displayName" required/>
+        </div>
+        <div class="form-group">
+          <label>Real Name</label>
+          <input type="text" name="realName" class="form-control" ng-model="user.realName" required/>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" class="form-control" ng-model="user.email" required />
+        </div>
+        <div class="form-group">
+          <label>IBAN</label>
+          <input type="text" name="iban" class="form-control" ng-model="user.iban" ng-iban="FI" required/>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="password" class="form-control" ng-model="user.password" ng-minlength="3" required />
+        </div>
+        <div>
+          <button class="btn btn-primary btn-lg" type="submit" ng-disabled="form.$invalid">
+            Add user
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <hr>
+
   <div class="row">
     <div class="col-lg-12">
       <h1 class="page-header">Users</h1>
@@ -33,7 +70,7 @@
                 <span ng-show="sort.by == 'iban' && sort.reverse" class="fa fa-caret-up"></span>
               </a>
             </th>
-            <th ng-if="currentUser.role === 'admin'"></th>
+            <th ng-if="isAdmin()"></th>
           </tr>
         </thead>
         <tbody>
@@ -42,7 +79,7 @@
             <td ng-bind="user.realName"></td>
             <td ng-bind="user.email"></td>
             <td ng-bind="user.iban"></td>
-            <td ng-if="currentUser.role === 'admin'">
+            <td ng-if="isAdmin()">
               <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
             </td>
           </tr>
