@@ -10,7 +10,8 @@ angular.module('kulutApp')
 
       if(form.$valid) {
         Auth.createUser({
-          name: $scope.user.name,
+          name: $scope.user.displayName,
+          realName: $scope.user.realName,
           email: $scope.user.email,
           iban: $scope.user.iban,
           password: $scope.user.password,
