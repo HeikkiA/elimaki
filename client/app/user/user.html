@@ -33,6 +33,7 @@
                 <span ng-show="sort.by == 'iban' && sort.reverse" class="fa fa-caret-up"></span>
               </a>
             </th>
+            <th ng-if="currentUser.role === 'admin'"></th>
           </tr>
         </thead>
         <tbody>
@@ -41,6 +42,9 @@
             <td ng-bind="user.realName"></td>
             <td ng-bind="user.email"></td>
             <td ng-bind="user.iban"></td>
+            <td ng-if="currentUser.role === 'admin'">
+              <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
+            </td>
           </tr>
         </tbody>
       </table>
