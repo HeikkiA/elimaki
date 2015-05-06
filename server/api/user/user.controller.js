@@ -1,5 +1,7 @@
 'use strict';
 
+var Payback = require('../payback/payback.model');
+var Purchase = require('../purchase/purchase.model');
 var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
@@ -98,4 +100,74 @@ exports.me = function(req, res, next) {
  */
 exports.authCallback = function(req, res, next) {
   res.redirect('/');
+};
+
+/**
+ * Get my stats
+*/
+exports.stats = function(req, res, next) {
+  var userId = req.user._id;
+
+  // purchases made
+  var purchasesMade = Purchase.aggregate([
+    { $match: {
+      author: userId
+    }},
+    { $group: {
+      _id: userId,
+      total: { $sum: '$amount' },
+      count: { $sum: 1 }
+    }}
+  ]).exec();
+
+  // purchases that include me
+  var purchasesIncluded = Purchase.aggregate([
+    { $match: {
+      participants: userId
+    }},
+    { $group: {
+      _id: userId,
+      total: { $sum: { $divide: ['$amount', { $size: '$participants' }] } },
+      count: { $sum: 1 }
+    }}
+  ]).exec();
+
+  // paybacks received
+  var paybacksReceived = Payback.aggregate([
+    { $match: {
+      recipient: userId
+    }},
+    { $group: {
+      _id: userId,
+      total: { $sum: '$amount' },
+      count: { $sum: 1 }
+    }}
+  ]).exec();
+
+  // paybacks send
+  var paybacksSent = Payback.aggregate([
+    { $match: {
+      author: userId
+    }},
+    { $group: {
+      _id: userId,
+      total: { $sum: '$amount' },
+      count: { $sum: 1 }
+    }}
+  ]).exec();
+
+  Promise.all([purchasesMade, purchasesIncluded, paybacksReceived, paybacksSent]).then(function(values) {
+    var made = values[0].length && values[0][0] || {};
+    var included = values[1].length && values[1][0] || {};
+    var received = values[2].length && values[2][0] || {};
+    var sent = values[3].length && values[3][0] || {};
+    var data = {
+      purchasesMade: made,
+      purchasesIncluded: included,
+      paybacksReceived: received,
+      paybacksSent: sent,
+      balance: made.total - included.total + sent.total - received.total
+    };
+    return res.json(200, data);
+  });
 };

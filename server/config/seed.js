@@ -9,9 +9,13 @@
 // var Purchase = require('../api/purchase/purchase.model');
 // var User = require('../api/user/user.model');
 
-// Payback.find({}).remove();
+// Payback.find({}).remove(function() {
+//   console.log('finished clearing paybacks');
+// });
 
-// Purchase.find({}).remove();
+// Purchase.find({}).remove(function() {
+//   console.log('finished clearing purchases');
+// });
 
 // User.find({}).remove(function() {
 //   User.create({

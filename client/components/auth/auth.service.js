@@ -141,6 +141,15 @@ angular.module('kulutApp')
        */
       getToken: function() {
         return $cookieStore.get('token');
+      },
+
+      stats: function(callback) {
+        var cb = callback || angular.noop;
+        return User.stats(function(stats) {
+          return cb(stats);
+        }, function(err) {
+          return cb(err);
+        }).$promise;
       }
     };
   });

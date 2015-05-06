@@ -9,13 +9,20 @@ angular.module('kulutApp')
       changePassword: {
         method: 'PUT',
         params: {
-          controller:'password'
+          controller: 'password'
         }
       },
       get: {
         method: 'GET',
         params: {
-          id:'me'
+          id: 'me'
+        }
+      },
+      stats: {
+        method: 'GET',
+        params: {
+          id: 'me',
+          controller: 'stats'
         }
       }
 	  });

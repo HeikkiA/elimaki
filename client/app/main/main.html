@@ -10,6 +10,42 @@
   <div class="row">
     <div class="col-lg-12">
       <h1 class="page-header">Stats:</h1>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Count</th>
+            <th>Sum</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Purchases made</td>
+            <td ng-bind="stats.purchasesMade.count"></td>
+            <td ng-bind="stats.purchasesMade.total | currency: '€'"></td>
+          </tr>
+          <tr>
+            <td>Purchases included</td>
+            <td ng-bind="stats.purchasesIncluded.count"></td>
+            <td ng-bind="stats.purchasesIncluded.total | currency: '€'"></td>
+          </tr>
+          <tr>
+            <td>Paybacks sent</td>
+            <td ng-bind="stats.paybacksSent.count"></td>
+            <td ng-bind="stats.paybacksSent.total | currency: '€'"></td>
+          </tr>
+          <tr>
+            <td>Paybacks received</td>
+            <td ng-bind="stats.paybacksReceived.count"></td>
+            <td ng-bind="stats.paybacksReceived.total | currency: '€'"></td>
+          </tr>
+          <tr>
+            <td>Balance</td>
+            <td></td>
+            <td ng-bind="stats.balance | currency: '€' "></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
