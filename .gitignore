@@ -6,3 +6,4 @@ public
 .idea
 dist
 /server/config/local.env.js
+.DS_Store

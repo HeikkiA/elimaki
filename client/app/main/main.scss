@@ -15,11 +15,20 @@
 
 .hero-unit {
     position: relative;
-    padding: 30px 15px;
+    padding: 80px 15px;
     color: #F5F5F5;
     text-align: center;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-    background: #4393B9;
+    background: url('../assets/images/elimaki.jpg') 50% 35% no-repeat;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+
+    &:hover {
+        -webkit-transform: scale(1.2);
+        -moz-transform: scale(1.2);
+        transform: scale(1.2);
+    }
 }
 
 .footer {
