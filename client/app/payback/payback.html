@@ -63,7 +63,7 @@
         <tbody>
           <tr ng-repeat="payback in paybacks | orderBy:sort.by:sort.reverse">
             <td ng-bind="payback.author.name"></td>
-            <td ng-bind="payback.amount"></td>
+            <td ng-bind="payback.amount | currency: '€'"></td>
             <td ng-bind="payback.description"></td>
             <td ng-bind="payback.recipient.name"></td>
             <td ng-bind="payback.created | date: 'dd.MM.yyyy hh:mm'"></td>

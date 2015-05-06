@@ -75,7 +75,7 @@
         <tbody>
           <tr ng-repeat="purchase in purchases | orderBy:sort.by:sort.reverse">
             <td ng-bind="purchase.author.name"></td>
-            <td ng-bind="purchase.amount"></td>
+            <td ng-bind="purchase.amount | currency: '€'"></td>
             <td ng-bind="purchase.category.name"></td>
             <td ng-bind="purchase.description"></td>
             <td>
