@@ -1,16 +1,12 @@
-.thing-form {
-    margin: 20px 0;
-}
-
 #banner {
     border-bottom: none;
     margin-top: -20px;
-}
 
-#banner h1 {
-    font-size: 60px;
-    line-height: 1;
-    letter-spacing: -1px;
+    h1 {
+        font-size: 60px;
+        line-height: 1;
+        letter-spacing: -1px;
+    }
 }
 
 .hero-unit {
@@ -19,16 +15,11 @@
     color: #F5F5F5;
     text-align: center;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-    background: url('../assets/images/elimaki.jpg') 50% 35% no-repeat;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-
-    &:hover {
-        -webkit-transform: scale(1.2);
-        -moz-transform: scale(1.2);
-        transform: scale(1.2);
-    }
+    background: url('../assets/images/elimaki.jpg') no-repeat;
+    background-size: 150%;
+    -webkit-animation: animate 30s linear infinite;
+    -moz-animation: animate 30s linear infinite;
+    animation: animate 30s linear infinite;
 }
 
 .footer {
@@ -36,4 +27,58 @@
     padding: 30px 0;
     margin-top: 70px;
     border-top: 1px solid #E5E5E5;
+}
+
+@-webkit-keyframes animate {
+    0% { background-position: 50% 50%; background-size: 150%; }
+    2.5% { background-position: 50% 50%; }
+    12.5% { background-position: 100% 0%; }
+    15% { background-position: 100% 0%; }
+    25% { background-position: 100% 50%; background-size: 100%; }
+    37.5% { background-position: 100% 100%; }
+    40% { background-position: 100% 100%; }
+    50% { background-position: 50% 50%; background-size: 150%; }
+    52.5% { background-position: 50% 50%; }
+    62.5% { background-position: 0% 100%; }
+    65% { background-position: 0% 100%; }
+    75% { background-position: 0% 50%; background-size: 100%; }
+    87.5% { background-position: 0% 0%; }
+    90% { background-position: 0% 0%; }
+    100% { background-position: 50% 50%; background-size: 150%; }
+}
+
+@-moz-keyframes animate {
+    0% { background-position: 50% 50%; background-size: 150%; }
+    2.5% { background-position: 50% 50%; }
+    12.5% { background-position: 100% 0%; }
+    15% { background-position: 100% 0%; }
+    25% { background-position: 100% 50%; background-size: 100%; }
+    37.5% { background-position: 100% 100%; }
+    40% { background-position: 100% 100%; }
+    50% { background-position: 50% 50%; background-size: 150%; }
+    52.5% { background-position: 50% 50%; }
+    62.5% { background-position: 0% 100%; }
+    65% { background-position: 0% 100%; }
+    75% { background-position: 0% 50%; background-size: 100%; }
+    87.5% { background-position: 0% 0%; }
+    90% { background-position: 0% 0%; }
+    100% { background-position: 50% 50%; background-size: 150%; }
+}
+
+@keyframes animate {
+    0% { background-position: 50% 50%; background-size: 150%; }
+    2.5% { background-position: 50% 50%; }
+    12.5% { background-position: 100% 0%; }
+    15% { background-position: 100% 0%; }
+    25% { background-position: 100% 50%; background-size: 100%; }
+    37.5% { background-position: 100% 100%; }
+    40% { background-position: 100% 100%; }
+    50% { background-position: 50% 50%; background-size: 150%; }
+    52.5% { background-position: 50% 50%; }
+    62.5% { background-position: 0% 100%; }
+    65% { background-position: 0% 100%; }
+    75% { background-position: 0% 50%; background-size: 100%; }
+    87.5% { background-position: 0% 0%; }
+    90% { background-position: 0% 0%; }
+    100% { background-position: 50% 50%; background-size: 150%; }
 }
