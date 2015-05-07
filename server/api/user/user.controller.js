@@ -157,10 +157,11 @@ exports.stats = function(req, res, next) {
   ]).exec();
 
   Promise.all([purchasesMade, purchasesIncluded, paybacksReceived, paybacksSent]).then(function(values) {
-    var made = values[0].length && values[0][0] || {};
-    var included = values[1].length && values[1][0] || {};
-    var received = values[2].length && values[2][0] || {};
-    var sent = values[3].length && values[3][0] || {};
+    var empty = { count: '', total: 0 };
+    var made = values[0].length && values[0][0] || empty;
+    var included = values[1].length && values[1][0] || empty;
+    var received = values[2].length && values[2][0] || empty;
+    var sent = values[3].length && values[3][0] || empty;
     var data = {
       purchasesMade: made,
       purchasesIncluded: included,
