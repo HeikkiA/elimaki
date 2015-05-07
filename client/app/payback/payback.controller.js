@@ -1,9 +1,11 @@
+/* global confirm */
 'use strict';
 
 angular.module('kulutApp')
   .controller('PaybackCtrl', function ($scope, $http, socket, Auth) {
     $scope.paybacks = [];
     $scope.users = [];
+    $scope.isAdmin = Auth.isAdmin;
     $scope.sort = { by: 'created', reverse: true };
     $scope.newPayback = {
       author: Auth.getCurrentUser()._id
@@ -28,6 +30,18 @@ angular.module('kulutApp')
           author: Auth.getCurrentUser()._id
         };
       });
+    };
+
+    $scope.delete = function(payback) {
+      if (confirm('Really delete this payback?')) {
+        $http.delete('/api/paybacks/' + payback._id).success(function() {
+          angular.forEach($scope.paybacks, function(p, i) {
+            if (p === payback) {
+              $scope.paybacks.splice(i, 1);
+            }
+          });
+        });
+      }
     };
 
     $scope.$on('$destroy', function () {

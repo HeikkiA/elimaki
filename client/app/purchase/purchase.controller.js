@@ -1,3 +1,4 @@
+/* global confirm */
 'use strict';
 
 angular.module('kulutApp')
@@ -5,6 +6,7 @@ angular.module('kulutApp')
     $scope.purchases = [];
     $scope.categories = [];
     $scope.users = [];
+    $scope.isAdmin = Auth.isAdmin;
     $scope.sort = { by: 'created', reverse: true };
     $scope.newPurchase = {
       author: Auth.getCurrentUser()._id
@@ -32,6 +34,18 @@ angular.module('kulutApp')
           author: Auth.getCurrentUser()._id
         };
       });
+    };
+
+    $scope.delete = function(purchase) {
+      if (confirm('Really delete this purchase?')) {
+        $http.delete('/api/purchases/' + purchase._id).success(function() {
+          angular.forEach($scope.purchases, function(p, i) {
+            if (p === purchase) {
+              $scope.purchases.splice(i, 1);
+            }
+          });
+        });
+      }
     };
 
     $scope.$on('$destroy', function () {

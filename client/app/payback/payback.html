@@ -58,6 +58,7 @@
                 <span ng-show="sort.by == 'created' && sort.reverse" class="fa fa-caret-up"></span>
               </a>
             </th>
+            <th ng-if="isAdmin()"></th>
           </tr>
         </thead>
         <tbody>
@@ -67,6 +68,9 @@
             <td ng-bind="payback.description"></td>
             <td ng-bind="payback.recipient.name"></td>
             <td ng-bind="payback.created | date: 'dd.MM.yyyy hh:mm'"></td>
+            <td ng-if="isAdmin()">
+              <a ng-click="delete(payback)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
+            </td>
           </tr>
         </tbody>
       </table>

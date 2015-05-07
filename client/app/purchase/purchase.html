@@ -70,6 +70,7 @@
                 <span ng-show="sort.by == 'created' && sort.reverse" class="fa fa-caret-up"></span>
               </a>
             </th>
+            <th ng-if="isAdmin()"></th>
           </tr>
         </thead>
         <tbody>
@@ -82,6 +83,9 @@
               <span ng-repeat="user in purchase.participants">{{user.name}}{{$last ? '' : ', '}}</span>
             </td>
             <td ng-bind="purchase.created | date: 'dd.MM.yyyy hh:mm'"></td>
+            <td ng-if="isAdmin()">
+              <a ng-click="delete(purchase)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
+            </td>
           </tr>
         </tbody>
       </table>
