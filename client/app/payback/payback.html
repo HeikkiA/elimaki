@@ -24,56 +24,59 @@
         <button class="btn btn-lg btn-primary" type="submit" ng-disabled="paybackForm.$invalid">Add payback</button>
       </form>
 
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>
-              <a href="#" ng-click="sort.by = 'author'; sort.reverse = !sort.reverse">
-                Author
-                <span ng-show="sort.by == 'author' && !sort.reverse" class="fa fa-caret-down"></span>
-                <span ng-show="sort.by == 'author' && sort.reverse" class="fa fa-caret-up"></span>
-              </a>
-            </th>
-            <th>
-              <a href="#" ng-click="sort.by = 'amount'; sort.reverse = !sort.reverse">
-                Amount
-                <span ng-show="sort.by == 'amount' && !sort.reverse" class="fa fa-caret-down"></span>
-                <span ng-show="sort.by == 'amount' && sort.reverse" class="fa fa-caret-up"></span>
-              </a>
-            </th>
-            <th>
-                Description
-            </th>
-            <th>
-              <a href="#" ng-click="sort.by = 'recipient'; sort.reverse = !sort.reverse">
-                Recipient
-                <span ng-show="sort.by == 'recipient' && !sort.reverse" class="fa fa-caret-down"></span>
-                <span ng-show="sort.by == 'recipient' && sort.reverse" class="fa fa-caret-up"></span>
-              </a>
-            </th>
-            <th>
-              <a href="#" ng-click="sort.by = 'created'; sort.reverse = !sort.reverse">
-                Created
-                <span ng-show="sort.by == 'created' && !sort.reverse" class="fa fa-caret-down"></span>
-                <span ng-show="sort.by == 'created' && sort.reverse" class="fa fa-caret-up"></span>
-              </a>
-            </th>
-            <th ng-if="isAdmin()"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="payback in paybacks | orderBy:sort.by:sort.reverse">
-            <td ng-bind="payback.author.name"></td>
-            <td ng-bind="payback.amount | currency: '€'"></td>
-            <td ng-bind="payback.description"></td>
-            <td ng-bind="payback.recipient.name"></td>
-            <td ng-bind="payback.created | date: 'dd.MM.yyyy hh:mm'"></td>
-            <td ng-if="isAdmin()">
-              <a ng-click="delete(payback)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>
+                <a href="#" ng-click="sort.by = 'author'; sort.reverse = !sort.reverse">
+                  Author
+                  <span ng-show="sort.by == 'author' && !sort.reverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sort.by == 'author' && sort.reverse" class="fa fa-caret-up"></span>
+                </a>
+              </th>
+              <th>
+                <a href="#" ng-click="sort.by = 'amount'; sort.reverse = !sort.reverse">
+                  Amount
+                  <span ng-show="sort.by == 'amount' && !sort.reverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sort.by == 'amount' && sort.reverse" class="fa fa-caret-up"></span>
+                </a>
+              </th>
+              <th>
+                  Description
+              </th>
+              <th>
+                <a href="#" ng-click="sort.by = 'recipient'; sort.reverse = !sort.reverse">
+                  Recipient
+                  <span ng-show="sort.by == 'recipient' && !sort.reverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sort.by == 'recipient' && sort.reverse" class="fa fa-caret-up"></span>
+                </a>
+              </th>
+              <th>
+                <a href="#" ng-click="sort.by = 'created'; sort.reverse = !sort.reverse">
+                  Created
+                  <span ng-show="sort.by == 'created' && !sort.reverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sort.by == 'created' && sort.reverse" class="fa fa-caret-up"></span>
+                </a>
+              </th>
+              <th ng-if="isAdmin()"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="payback in paybacks | orderBy:sort.by:sort.reverse">
+              <td ng-bind="payback.author.name"></td>
+              <td ng-bind="payback.amount | currency: '€'"></td>
+              <td ng-bind="payback.description"></td>
+              <td ng-bind="payback.recipient.name"></td>
+              <td ng-bind="payback.created | date: 'dd.MM.yyyy hh:mm'"></td>
+              <td ng-if="isAdmin()">
+                <a ng-click="delete(payback)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
   </div>
 </div>
