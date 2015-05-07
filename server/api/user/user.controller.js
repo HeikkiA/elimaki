@@ -16,7 +16,7 @@ var validationError = function(res, err) {
  * restriction: 'admin'
  */
 exports.index = function(req, res) {
-  User.find({}, '-salt -hashedPassword', function (err, users) {
+  User.find({}, '-salt -hashedPassword', { sort: { name: 'asc'}}, function (err, users) {
     if(err) return res.send(500, err);
     res.json(200, users);
   });
