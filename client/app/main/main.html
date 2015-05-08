@@ -18,22 +18,22 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr ng-class="{ 'clickable': stats.purchasesMade.count > 0 }" ng-click="goto($event, '/purchase/made')">
             <td>Purchases made</td>
             <td ng-bind="stats.purchasesMade.count"></td>
             <td ng-bind="stats.purchasesMade.total | currency: '€'"></td>
           </tr>
-          <tr>
+          <tr ng-class="{ 'clickable': stats.purchasesIncluded.count > 0 }" ng-click="goto($event, '/purchase/included')">
             <td>Purchases included</td>
             <td ng-bind="stats.purchasesIncluded.count"></td>
             <td ng-bind="stats.purchasesIncluded.total | currency: '€'"></td>
           </tr>
-          <tr>
+          <tr ng-class="{ 'clickable': stats.paybacksSent.count > 0 }" ng-click="goto($event, '/payback/sent')">
             <td>Paybacks sent</td>
             <td ng-bind="stats.paybacksSent.count"></td>
             <td ng-bind="stats.paybacksSent.total | currency: '€'"></td>
           </tr>
-          <tr>
+          <tr ng-class="{ 'clickable': stats.paybacksReceived.count > 0 }" ng-click="goto($event, '/payback/received')">
             <td>Paybacks received</td>
             <td ng-bind="stats.paybacksReceived.count"></td>
             <td ng-bind="stats.paybacksReceived.total | currency: '€'"></td>

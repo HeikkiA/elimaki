@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Paybacks sent</h1>
+
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>
+                <a href="#" ng-click="sort.by = 'amount'; sort.reverse = !sort.reverse">
+                  Amount
+                  <span ng-show="sort.by == 'amount' && !sort.reverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sort.by == 'amount' && sort.reverse" class="fa fa-caret-up"></span>
+                </a>
+              </th>
+              <th>
+                  Description
+              </th>
+              <th>
+                <a href="#" ng-click="sort.by = 'recipient.name'; sort.reverse = !sort.reverse">
+                  Recipient
+                  <span ng-show="sort.by == 'recipient.name' && !sort.reverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sort.by == 'recipient.name' && sort.reverse" class="fa fa-caret-up"></span>
+                </a>
+              </th>
+              <th>
+                <a href="#" ng-click="sort.by = 'created'; sort.reverse = !sort.reverse">
+                  Created
+                  <span ng-show="sort.by == 'created' && !sort.reverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sort.by == 'created' && sort.reverse" class="fa fa-caret-up"></span>
+                </a>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="payback in paybacks | orderBy:sort.by:sort.reverse">
+              <td ng-bind="payback.amount | currency: '€'"></td>
+              <td ng-bind="payback.description"></td>
+              <td ng-bind="payback.recipient.name"></td>
+              <td ng-bind="payback.created | date: 'dd.MM.yyyy hh:mm'"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

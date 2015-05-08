@@ -70,6 +70,32 @@ exports.destroy = function(req, res) {
   });
 };
 
+/*
+ * Get paybacks sent by me
+ */
+exports.sent = function(req, res, next) {
+  var userId = req.params.userId;
+  Payback.find({ author: userId }).populate('recipient').exec(function(err, paybacks) {
+    if (err) {
+      return handleError(res, err);
+    }
+    res.json(200, paybacks);
+  });
+}
+
+/*
+ * Get paybacks received by me
+ */
+exports.received = function(req, res, next) {
+  var userId = req.params.userId;
+  Payback.find({ recipient: userId }).populate('author').populate('recipient').exec(function(err, paybacks) {
+    if (err) {
+      return handleError(res, err);
+    }
+    res.json(200, paybacks);
+  });
+}
+
 function handleError(res, err) {
   return res.send(500, err);
 }

@@ -104,7 +104,7 @@ exports.authCallback = function(req, res, next) {
 
 /**
  * Get my stats
-*/
+ */
 exports.stats = function(req, res, next) {
   var userId = req.user._id;
 
@@ -157,7 +157,7 @@ exports.stats = function(req, res, next) {
   ]).exec();
 
   Promise.all([purchasesMade, purchasesIncluded, paybacksReceived, paybacksSent]).then(function(values) {
-    var empty = { count: '', total: 0 };
+    var empty = { count: 0, total: 0 };
     var made = values[0].length && values[0][0] || empty;
     var included = values[1].length && values[1][0] || empty;
     var received = values[2].length && values[2][0] || empty;

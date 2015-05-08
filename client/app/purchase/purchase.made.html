@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1>Purchases made</h1>
+
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>
+                <a href="#" ng-click="sort.by = 'amount'; sort.reverse = !sort.reverse">
+                  Amount
+                  <span ng-show="sort.by == 'amount' && !sort.reverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sort.by == 'amount' && sort.reverse" class="fa fa-caret-up"></span>
+                </a>
+              </th>
+              <th>
+                <a href="#" ng-click="sort.by = 'category.name'; sort.reverse = !sort.reverse">
+                  Category
+                  <span ng-show="sort.by == 'category.name' && !sort.reverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sort.by == 'category.name' && sort.reverse" class="fa fa-caret-up"></span>
+                </a>
+              </th>
+              <th>
+                  Description
+              </th>
+              <th>
+                  Participants
+              </th>
+              <th>
+                <a href="#" ng-click="sort.by = 'created'; sort.reverse = !sort.reverse">
+                  Created
+                  <span ng-show="sort.by == 'created' && !sort.reverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sort.by == 'created' && sort.reverse" class="fa fa-caret-up"></span>
+                </a>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="purchase in purchases | orderBy:sort.by:sort.reverse">
+              <td ng-bind="purchase.amount | currency: '€'"></td>
+              <td ng-bind="purchase.category.name"></td>
+              <td ng-bind="purchase.description"></td>
+              <td>
+                <span ng-repeat="user in purchase.participants">{{user.name}}{{$last ? '' : ', '}}</span>
+              </td>
+              <td ng-bind="purchase.created | date: 'dd.MM.yyyy hh:mm'"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>

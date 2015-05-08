@@ -72,6 +72,32 @@ exports.destroy = function(req, res) {
   });
 };
 
+/*
+ * Get my purchases
+ */
+exports.made = function(req, res, next) {
+  var userId = req.params.userId;
+  Purchase.find({ author: userId }).populate('category').populate('participants').exec(function(err, purchases) {
+    if (err) {
+      return handleError(res, err);
+    }
+    res.json(200, purchases);
+  });
+}
+
+/*
+ * Get purchases that include me
+ */
+exports.included = function(req, res, next) {
+  var userId = req.params.userId;
+  Purchase.find({ participants: userId }).populate('author').populate('category').populate('participants').exec(function(err, purchases) {
+    if (err) {
+      return handleError(res, err);
+    }
+    res.json(200, purchases);
+  });
+}
+
 function handleError(res, err) {
   return res.send(500, err);
 }
