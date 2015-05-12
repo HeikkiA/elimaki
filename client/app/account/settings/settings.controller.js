@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('kulutApp')
-  .controller('SettingsCtrl', function ($scope, $location, Auth) {
+  .controller('SettingsCtrl', function ($scope, $http, $location, Auth) {
 
-    $scope.changePassword = function(form) {
+    $scope.user = Auth.getCurrentUser();
+
+    $scope.changePassword = function() {
       Auth.changePassword( $scope.user.oldPassword, $scope.user.newPassword )
       .then(function() {
         $location.path('/');
@@ -14,8 +16,6 @@ angular.module('kulutApp')
 		};
 
     $scope.checkNewPassword = function() {
-      console.log($scope.user);
-
       $scope.passwordForm.newPassword.$setValidity('', true);
       $scope.passwordForm.newPassword2.$setValidity('', true);
 
@@ -33,6 +33,18 @@ angular.module('kulutApp')
         $scope.passwordForm.newPassword.$setValidity('', false);
         $scope.passwordForm.newPassword2.$setValidity('', false);
       }
+    };
+
+    $scope.updateProfile = function() {
+      var user = {
+        name: $scope.user.name,
+        realname: $scope.user.realName,
+        email: $scope.user.email,
+        iban: $scope.user.iban
+      };
+      $http.put('/api/users', user).success(function() {
+        $location.path('/');
+      });
     };
 
   });

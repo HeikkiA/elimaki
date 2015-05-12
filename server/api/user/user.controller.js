@@ -6,6 +6,7 @@ var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var _ = require('lodash');
 
 var validationError = function(res, err) {
   return res.json(422, err);
@@ -57,6 +58,27 @@ exports.destroy = function(req, res) {
   User.findByIdAndRemove(req.params.id, function(err, user) {
     if(err) return res.send(500, err);
     return res.send(204);
+  });
+};
+
+/**
+ * Updated my user data
+ */
+exports.update = function(req, res, next) {
+  User.findById(req.user._id, function (err, user) {
+    if (err) {
+      return handleError(res, err);
+    }
+    if (!user) {
+      return res.send(404);
+    }
+    var updated = _.merge(user, req.body);
+    updated.save(function (err) {
+      if (err) {
+        return handleError(res, err);
+      }
+      return res.json(200);
+    });
   });
 };
 

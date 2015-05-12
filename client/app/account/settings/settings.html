@@ -1,11 +1,11 @@
 <div class="container">
+
   <div class="row">
     <div class="col-sm-12">
       <h1>Change Password</h1>
     </div>
     <div class="col-sm-12">
-
-      <form class="form" name="passwordForm" ng-submit="changePassword(passwordForm)" novalidate>
+      <form class="form" name="passwordForm" ng-submit="changePassword()" novalidate>
         <div class="form-group">
           <label>Current Password</label>
           <input type="password" name="password" class="form-control" ng-model="user.oldPassword" required />
@@ -22,4 +22,32 @@
       </form>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>Update Profile</h1>
+    </div>
+    <div class="col-sm-12">
+      <form class="form" name="profileForm" ng-submit="updateProfile()" novalidate>
+        <div class="form-group">
+          <label>Display Name</label>
+          <input type="text" name="name" class="form-control" ng-model="user.name" required/>
+        </div>
+        <div class="form-group">
+          <label>Real Name</label>
+          <input type="text" name="realName" class="form-control" ng-model="user.realName" required/>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" class="form-control" ng-model="user.email" required />
+        </div>
+        <div class="form-group">
+          <label>IBAN</label>
+          <input type="text" name="iban" class="form-control" ng-model="user.iban" ng-iban="FI" required/>
+        </div>
+        <button class="btn btn-lg btn-primary" type="submit" ng-disabled="profileForm.$invalid">Save changes</button>
+      </form>
+    </div>
+  </div>
+
 </div>
