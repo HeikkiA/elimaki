@@ -2,7 +2,6 @@
   <div class="row">
     <div class="col-lg-12">
       <h1 class="page-header">Purchases</h1>
-
       <form name="purchaseForm" ng-submit="addPurchase()">
         <div class="form-group">
           <label>Amount</label>
@@ -32,7 +31,16 @@
         </div>
         <button class="btn btn-lg btn-primary" type="submit" ng-disabled="purchaseForm.$invalid">Add purchase</button>
       </form>
+    </div>
+  </div>
+  <hr/>
 
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="form-group">
+        <label>Filter</label>
+        <input type="text" class="form-control" ng-model="purchaseFilter">
+      </div>
       <div class="table-responsive">
         <table class="table table-striped">
           <thead>
@@ -75,7 +83,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="purchase in purchases | orderBy:sort.by:sort.reverse">
+            <tr ng-repeat="purchase in purchases | orderBy:sort.by:sort.reverse | filter:purchaseFilter">
               <td ng-bind="purchase.author.name"></td>
               <td ng-bind="purchase.amount | currency: '€'"></td>
               <td ng-bind="purchase.category.name"></td>
@@ -91,7 +99,7 @@
           </tbody>
         </table>
       </div>
-
     </div>
   </div>
+
 </div>
