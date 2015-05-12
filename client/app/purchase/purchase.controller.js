@@ -27,6 +27,14 @@ angular.module('kulutApp')
       socket.syncUpdates('user', $scope.users);
     });
 
+    $scope.selectAllParticipants = function() {
+      if ($scope.allSelected) {
+        $scope.newPurchase.participants = _.pluck($scope.users, '_id');
+      } else {
+        $scope.newPurchase.participants = [];
+      }
+    };
+
     $scope.addPurchase = function() {
       $http.post('/api/purchases', $scope.newPurchase).success(function(purchase) {
         console.log('Purchase added:', purchase);

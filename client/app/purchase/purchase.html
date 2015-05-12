@@ -26,8 +26,11 @@
             ng-model="newPurchase.participants"
             ng-options="user._id as user.name for user in users"
             multiple required>
-            <option value="" ng-hide="newPurchase.participants">Choose participants</option>
           </select>
+        </div>
+        <div class="form-group">
+          <label for="allParticipants">Select All</label>
+          <input type="checkbox" id="allParticipants" ng-model="allSelected" ng-change="selectAllParticipants()" />
         </div>
         <button class="btn btn-lg btn-primary" type="submit" ng-disabled="purchaseForm.$invalid">Add purchase</button>
       </form>
