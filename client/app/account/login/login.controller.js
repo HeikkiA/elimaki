@@ -16,7 +16,14 @@ angular.module('kulutApp')
       })
       .catch( function(err) {
         $('#feedback').scope().addAlert('danger', err.message);
+        if (err.field) {
+          form[err.field].$setValidity(null, false);
+        }
       });
+    };
+
+    $scope.change = function(elem) {
+      elem.$setValidity(null, true);
     };
 
   });

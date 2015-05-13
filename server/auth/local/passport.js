@@ -10,13 +10,14 @@ exports.setup = function (User, config) {
       User.findOne({
         email: email.toLowerCase()
       }, function(err, user) {
-        if (err) return done(err);
-
+        if (err) {
+          return done(err);
+        }
         if (!user) {
-          return done(null, false, { message: 'This email is not registered.' });
+          return done(null, false, { message: 'This email is not registered.', field: 'email' });
         }
         if (!user.authenticate(password)) {
-          return done(null, false, { message: 'This password is not correct.' });
+          return done(null, false, { message: 'This password is not correct.', field: 'password' });
         }
         return done(null, user);
       });
