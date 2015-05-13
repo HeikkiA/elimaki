@@ -14,32 +14,43 @@ angular.module('kulutApp')
     });
 
     $scope.register = function(form) {
-      if (form.$valid) {
-        Auth.createUser({
-          name: $scope.user.displayName,
-          realName: $scope.user.realName,
-          email: $scope.user.email,
-          iban: $scope.user.iban,
-          password: $scope.user.password,
-        })
-        .then( function() {
-          $scope.user = {};
-        })
-        .catch(function(err) {
-          console.log('Error creating new user:', err);
-        });
-      }
+      Auth.createUser({
+        name: $scope.user.name,
+        realName: $scope.user.realName,
+        email: $scope.user.email,
+        iban: $scope.user.iban,
+        password: $scope.user.password,
+      })
+      .then( function() {
+        $('#feedback').scope().addAlert('success', 'User created.');
+        form.$setPristine();
+        $scope.user = {};
+      })
+      .catch(function(err) {
+        if (err.data && err.data.errors) {
+          for (var key in err.data.errors) {
+            $('#feedback').scope().addAlert('danger', err.data.errors[key].message);
+            form[err.data.errors[key].path].$setValidity(null, false);
+          }
+        }
+        console.log('Error creating new user:', err);
+      });
     };
 
     $scope.delete = function(user) {
       if (confirm('Really delete this user?')) {
         User.remove({ id: user._id });
+        $('#feedback').scope().addAlert('success', 'User deleted.');
         angular.forEach($scope.users, function(u, i) {
           if (u === user) {
             $scope.users.splice(i, 1);
           }
         });
       }
+    };
+
+    $scope.change = function(elem) {
+      elem.$setValidity(null, true);
     };
 
     $scope.$on('$destroy', function () {

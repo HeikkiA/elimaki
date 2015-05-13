@@ -61,12 +61,9 @@ angular.module('kulutApp')
 
         return User.save(user,
           function() {
-            // $cookieStore.put('token', data.token);
-            // currentUser = User.get();
             return cb(user);
           },
           function(err) {
-            this.logout();
             return cb(err);
           }.bind(this)).$promise;
       },
