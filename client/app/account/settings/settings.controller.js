@@ -52,6 +52,15 @@ angular.module('kulutApp')
       };
       $http.put('/api/users', user).success(function() {
         $('#feedback').scope().addAlert({ type: 'success', message: 'Profile updated.' });
+      }).
+      catch(function(err) {
+        if (err.data && err.data.errors) {
+          for (var key in err.data.errors) {
+            $('#feedback').scope().addAlert(err.data.errors[key]);
+            form[err.data.errors[key].path].$setValidity(null, false);
+          }
+        }
+        console.log('error updating profile:', err);
       });
     };
 

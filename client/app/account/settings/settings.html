@@ -28,10 +28,10 @@
       <h1>Update Profile</h1>
     </div>
     <div class="col-sm-12">
-      <form class="form" name="profileForm" ng-submit="updateProfile(form)" novalidate>
+      <form class="form" name="profileForm" ng-submit="updateProfile(profileForm)" novalidate>
         <div class="form-group">
           <label>Display Name</label>
-          <input type="text" name="name" class="form-control" ng-model="user.name" required/>
+          <input type="text" name="name" class="form-control" ng-model="user.name" ng-change="change(profileForm.name)" required/>
         </div>
         <div class="form-group">
           <label>Real Name</label>
@@ -39,7 +39,7 @@
         </div>
         <div class="form-group">
           <label>Email</label>
-          <input type="email" name="email" class="form-control" ng-model="user.email" required />
+          <input type="email" name="email" class="form-control" ng-model="user.email" ng-change="change(profileForm.email)" required />
         </div>
         <div class="form-group">
           <label>IBAN</label>

@@ -67,7 +67,7 @@ exports.destroy = function(req, res) {
 exports.update = function(req, res, next) {
   User.findById(req.user._id, function (err, user) {
     if (err) {
-      return handleError(res, err);
+      return validationError(res, err);
     }
     if (!user) {
       return res.send(404);
@@ -75,7 +75,7 @@ exports.update = function(req, res, next) {
     var updated = _.merge(user, req.body);
     updated.save(function (err) {
       if (err) {
-        return handleError(res, err);
+        return validationError(res, err);
       }
       return res.json(200);
     });
