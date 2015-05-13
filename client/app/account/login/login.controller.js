@@ -19,6 +19,7 @@ angular.module('kulutApp')
         if (err.field) {
           form[err.field].$setValidity(null, false);
         }
+        console.log('error logging in:', err);
       });
     };
 

@@ -36,7 +36,7 @@ angular.module('kulutApp')
     };
 
     $scope.addPurchase = function(form) {
-      $http.post('/api/purchases', $scope.newPurchase).success(function(purchase) {
+      $http.post('/api/purchases', $scope.newPurchase).success(function() {
         $('#feedback').scope().addAlert({ type: 'success', message: 'Purchase added.' });
         $scope.newPurchase = {
           author: Auth.getCurrentUser()._id

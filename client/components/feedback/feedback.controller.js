@@ -12,7 +12,7 @@ angular.module('kulutApp')
     $scope.addAlert = function(options) {
       var msg = options.message || options.data && options.data.message;
       var type = options.type || options.data && options.data.type;
-      if (!type || types.indexOf(type) == -1) {
+      if (!type || types.indexOf(type) === -1) {
         type = 'danger';
       }
 

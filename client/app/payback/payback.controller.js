@@ -24,7 +24,7 @@ angular.module('kulutApp')
     });
 
     $scope.addPayback = function(form) {
-      $http.post('/api/paybacks', $scope.newPayback).success(function(payback) {
+      $http.post('/api/paybacks', $scope.newPayback).success(function() {
         $('#feedback').scope().addAlert({ type: 'success', message: 'Payback added.' });
         $scope.newPayback = {
           author: Auth.getCurrentUser()._id
