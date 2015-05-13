@@ -2,6 +2,7 @@
 
 angular.module('kulutApp')
   .controller('FeedbackCtrl', function ($scope, $timeout, $anchorScroll) {
+    var types = ['danger', 'info', 'success', 'warning'];
     $scope.alerts = [];
 
     $scope.closeAlert = function(index) {
@@ -10,7 +11,10 @@ angular.module('kulutApp')
 
     $scope.addAlert = function(options) {
       var msg = options.message || options.data && options.data.message;
-      var type = options.type || options.data && options.data.type || 'danger';
+      var type = options.type || options.data && options.data.type;
+      if (!type || types.indexOf(type) == -1) {
+        type = 'danger';
+      }
 
       // show maximum of three latest alarms
       if ($scope.alerts.length > 2) {
