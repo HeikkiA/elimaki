@@ -9,6 +9,9 @@ angular.module('kulutApp')
       Auth.changePassword($scope.user.oldPassword, $scope.user.newPassword)
       .then(function() {
         $('#feedback').scope().addAlert({ type:'success', message: 'Password changed.' });
+        $scope.user.oldPassword = '';
+        $scope.user.newPassword = '';
+        $scope.user.newPassword2 = '';
         form.$setPristine();
       })
       .catch(function(err) {
