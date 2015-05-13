@@ -5,10 +5,10 @@
       <h1>Change Password</h1>
     </div>
     <div class="col-sm-12">
-      <form class="form" name="passwordForm" ng-submit="changePassword()" novalidate>
+      <form class="form" name="passwordForm" ng-submit="changePassword(passwordForm)" novalidate>
         <div class="form-group">
           <label>Current Password</label>
-          <input type="password" name="password" class="form-control" ng-model="user.oldPassword" required />
+          <input type="password" name="password" class="form-control" ng-model="user.oldPassword" ng-change="change(passwordForm.password)"  required />
         </div>
         <div class="form-group">
           <label>New Password</label>
@@ -28,7 +28,7 @@
       <h1>Update Profile</h1>
     </div>
     <div class="col-sm-12">
-      <form class="form" name="profileForm" ng-submit="updateProfile()" novalidate>
+      <form class="form" name="profileForm" ng-submit="updateProfile(form)" novalidate>
         <div class="form-group">
           <label>Display Name</label>
           <input type="text" name="name" class="form-control" ng-model="user.name" required/>

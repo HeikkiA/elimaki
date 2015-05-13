@@ -5,13 +5,18 @@ angular.module('kulutApp')
 
     $scope.user = Auth.getCurrentUser();
 
-    $scope.changePassword = function() {
-      Auth.changePassword( $scope.user.oldPassword, $scope.user.newPassword )
+    $scope.changePassword = function(form) {
+      Auth.changePassword($scope.user.oldPassword, $scope.user.newPassword)
       .then(function() {
-        $location.path('/');
+        $('#feedback').scope().addAlert({ type:'success', message: 'Password changed.' });
+        form.$setPristine();
       })
       .catch(function(err) {
-        console.log('error changing password:', err.data);
+        $('#feedback').scope().addAlert(err);
+        if (err.data && err.data.field) {
+          form[err.data.field].$setValidity(null, false);
+        }
+        console.log('error changing password:', err);
       });
 		};
 
@@ -35,7 +40,7 @@ angular.module('kulutApp')
       }
     };
 
-    $scope.updateProfile = function() {
+    $scope.updateProfile = function(form) {
       var user = {
         name: $scope.user.name,
         realname: $scope.user.realName,
@@ -43,8 +48,12 @@ angular.module('kulutApp')
         iban: $scope.user.iban
       };
       $http.put('/api/users', user).success(function() {
-        $location.path('/');
+        $('#feedback').scope().addAlert({ type: 'success', message: 'Profile updated.' });
       });
+    };
+
+    $scope.change = function(elem) {
+      elem.$setValidity(null, true);
     };
 
   });
