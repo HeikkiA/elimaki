@@ -23,18 +23,20 @@ angular.module('kulutApp')
       socket.syncUpdates('user', $scope.users);
     });
 
-    $scope.addPayback = function() {
+    $scope.addPayback = function(form) {
       $http.post('/api/paybacks', $scope.newPayback).success(function(payback) {
-        console.log('Payback added:', payback);
+        $('#feedback').scope().addAlert({ type: 'success', message: 'Payback added.' });
         $scope.newPayback = {
           author: Auth.getCurrentUser()._id
         };
+        form.$setPristine();
       });
     };
 
     $scope.delete = function(payback) {
       if (confirm('Really delete this payback?')) {
         $http.delete('/api/paybacks/' + payback._id).success(function() {
+          $('#feedback').scope().addAlert({ type: 'success', message: 'Payback deleted.' });
           angular.forEach($scope.paybacks, function(p, i) {
             if (p === payback) {
               $scope.paybacks.splice(i, 1);

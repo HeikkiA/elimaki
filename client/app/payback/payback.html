@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-lg-12">
       <h1 class="page-header">Paybacks</h1>
-      <form name="paybackForm" ng-submit="addPayback()">
+      <form name="paybackForm" ng-submit="addPayback(paybackForm)">
         <div class="form-group">
           <label>Amount</label>
           <input type="number" min="0" step="0.01" name="amount" class="form-control" ng-model="newPayback.amount" required>

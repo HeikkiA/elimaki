@@ -35,18 +35,20 @@ angular.module('kulutApp')
       }
     };
 
-    $scope.addPurchase = function() {
+    $scope.addPurchase = function(form) {
       $http.post('/api/purchases', $scope.newPurchase).success(function(purchase) {
-        console.log('Purchase added:', purchase);
+        $('#feedback').scope().addAlert({ type: 'success', message: 'Purchase added.' });
         $scope.newPurchase = {
           author: Auth.getCurrentUser()._id
         };
+        form.$setPristine();
       });
     };
 
     $scope.delete = function(purchase) {
       if (confirm('Really delete this purchase?')) {
         $http.delete('/api/purchases/' + purchase._id).success(function() {
+          $('#feedback').scope().addAlert({ type: 'success', message: 'Purchase deleted.' });
           angular.forEach($scope.purchases, function(p, i) {
             if (p === purchase) {
               $scope.purchases.splice(i, 1);
