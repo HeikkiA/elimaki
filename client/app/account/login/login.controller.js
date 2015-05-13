@@ -10,12 +10,12 @@ angular.module('kulutApp')
         email: $scope.user.email,
         password: $scope.user.password
       })
-      .then( function() {
+      .then(function() {
         // Logged in, redirect to home
         $location.path('/');
       })
-      .catch( function(err) {
-        $('#feedback').scope().addAlert('danger', err.message);
+      .catch(function(err) {
+        $('#feedback').scope().addAlert(err);
         if (err.field) {
           form[err.field].$setValidity(null, false);
         }

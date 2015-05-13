@@ -22,14 +22,14 @@ angular.module('kulutApp')
         password: $scope.user.password,
       })
       .then( function() {
-        $('#feedback').scope().addAlert('success', 'User created.');
+        $('#feedback').scope().addAlert({ type: 'success', message: 'User created.' });
         form.$setPristine();
         $scope.user = {};
       })
       .catch(function(err) {
         if (err.data && err.data.errors) {
           for (var key in err.data.errors) {
-            $('#feedback').scope().addAlert('danger', err.data.errors[key].message);
+            $('#feedback').scope().addAlert(err.data.errors[key]);
             form[err.data.errors[key].path].$setValidity(null, false);
           }
         }
@@ -40,7 +40,7 @@ angular.module('kulutApp')
     $scope.delete = function(user) {
       if (confirm('Really delete this user?')) {
         User.remove({ id: user._id });
-        $('#feedback').scope().addAlert('success', 'User deleted.');
+        $('#feedback').scope().addAlert({ type: 'success', message: 'User deleted.' });
         angular.forEach($scope.users, function(u, i) {
           if (u === user) {
             $scope.users.splice(i, 1);
