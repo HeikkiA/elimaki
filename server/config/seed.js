@@ -5,36 +5,48 @@
 
 'use strict';
 
-// var Payback = require('../api/payback/payback.model');
-// var Purchase = require('../api/purchase/purchase.model');
-// var User = require('../api/user/user.model');
+var Category = require('../api/category/category.model');
+var Payback = require('../api/payback/payback.model');
+var Purchase = require('../api/purchase/purchase.model');
+var User = require('../api/user/user.model');
 
-// Payback.find({}).remove(function() {
-//   console.log('finished clearing paybacks');
-// });
+Category.find({}).remove(function() {
+  Category.create({
+    name: 'Food'
+  }, {
+    name: 'Fuel'
+  }, {
+    name: 'Other'
+  });
+  console.log('Finished populating categories');
+});
 
-// Purchase.find({}).remove(function() {
-//   console.log('finished clearing purchases');
-// });
+Payback.find({}).remove(function() {
+  console.log('Finished clearing paybacks');
+});
 
-// User.find({}).remove(function() {
-//   User.create({
-//     provider: 'local',
-//     name: 'Tester',
-//     realName: 'Test User',
-//     email: 'test@test.com',
-//     iban: 'FI2112345600000785',
-//     password: 'test'
-//   }, {
-//     provider: 'local',
-//     name: 'Admin #1',
-//     role: 'admin',
-//     realName: 'Admin User',
-//     email: 'admin@admin.com',
-//     iban: 'FI2112345600000785',
-//     password: 'admin'
-//   }, function() {
-//       console.log('finished populating users');
-//     }
-//   );
-// });
+Purchase.find({}).remove(function() {
+  console.log('Finished clearing purchases');
+});
+
+User.find({}).remove(function() {
+  User.create({
+    provider: 'local',
+    name: 'Test',
+    realName: 'Test User',
+    email: 'test@test.com',
+    iban: 'FI2112345600000785',
+    password: 'test'
+  }, {
+    provider: 'local',
+    name: 'Admin',
+    role: 'admin',
+    realName: 'Administrator',
+    email: 'admin@test.com',
+    iban: 'FI2112345600000785',
+    password: 'test'
+  }, function() {
+      console.log('Finished populating users');
+    }
+  );
+});
