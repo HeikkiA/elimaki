@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('kulutApp')
+angular.module('elimakiApp')
   .config(function ($routeProvider) {
     $routeProvider
       .when('/login', {

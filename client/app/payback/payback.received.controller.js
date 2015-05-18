@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('kulutApp')
+angular.module('elimakiApp')
   .controller('PaybackReceivedCtrl', function ($scope, $http, socket, Auth) {
 
     $scope.paybacks = [];

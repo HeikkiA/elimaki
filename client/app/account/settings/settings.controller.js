@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('kulutApp')
+angular.module('elimakiApp')
   .controller('SettingsCtrl', function ($scope, $http, $location, Auth) {
 
     $scope.user = Auth.getCurrentUser();

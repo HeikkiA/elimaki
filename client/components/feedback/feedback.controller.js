@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('kulutApp')
+angular.module('elimakiApp')
   .controller('FeedbackCtrl', function ($scope, $timeout, $anchorScroll, socket, Auth) {
     var types = ['danger', 'info', 'success', 'warning'];
     var currentUserId = Auth.getCurrentUser()._id;

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('kulutApp', [
+angular.module('elimakiApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',

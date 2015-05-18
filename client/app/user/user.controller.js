@@ -1,7 +1,7 @@
 /* global confirm */
 'use strict';
 
-angular.module('kulutApp')
+angular.module('elimakiApp')
   .controller('UserCtrl', function ($scope, $http, socket, Auth, User) {
     $scope.user = {};
     $scope.users = [];

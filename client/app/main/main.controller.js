@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('kulutApp')
+angular.module('elimakiApp')
   .controller('MainCtrl', function ($scope, $http, $location, socket, Auth) {
     $scope.stats = {};
 

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('kulutApp')
+angular.module('elimakiApp')
   .controller('PurchaseIncludedCtrl', function ($scope, $http, socket, Auth) {
 
     $scope.purchases = [];

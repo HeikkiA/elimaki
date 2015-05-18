@@ -3,7 +3,7 @@
 describe('Controller: PaybackCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('kulutApp'));
+  beforeEach(module('elimakiApp'));
 
   var PaybackCtrl, scope;
 

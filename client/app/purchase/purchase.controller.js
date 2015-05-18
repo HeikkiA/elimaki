@@ -1,7 +1,7 @@
 /* global confirm */
 'use strict';
 
-angular.module('kulutApp')
+angular.module('elimakiApp')
   .controller('PurchaseCtrl', function ($scope, $http, socket, Auth) {
     $scope.purchases = [];
     $scope.categories = [];

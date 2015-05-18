@@ -1,7 +1,7 @@
 /* global confirm */
 'use strict';
 
-angular.module('kulutApp')
+angular.module('elimakiApp')
   .controller('PaybackCtrl', function ($scope, $http, socket, Auth) {
     $scope.paybacks = [];
     $scope.users = [];
