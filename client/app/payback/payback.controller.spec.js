@@ -4,6 +4,7 @@ describe('Controller: PaybackCtrl', function () {
 
   // load the controller's module
   beforeEach(module('elimakiApp'));
+  beforeEach(module('socketMock'));
 
   var PaybackCtrl, scope;
 

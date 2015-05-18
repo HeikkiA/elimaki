@@ -4,6 +4,7 @@ describe('Controller: UserCtrl', function () {
 
   // load the controller's module
   beforeEach(module('elimakiApp'));
+  beforeEach(module('socketMock'));
 
   var UserCtrl, scope;
 

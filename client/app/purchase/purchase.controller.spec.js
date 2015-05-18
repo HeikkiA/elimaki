@@ -4,6 +4,7 @@ describe('Controller: PurchaseCtrl', function () {
 
   // load the controller's module
   beforeEach(module('elimakiApp'));
+  beforeEach(module('socketMock'));
 
   var PurchaseCtrl, scope;
 
