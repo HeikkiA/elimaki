@@ -19,6 +19,7 @@ function onSave(socket, doc, cb) {
   Payback.findOne({ _id: doc._id }).populate('author').populate('recipient').exec(function (err, payback) {
     if (!err) {
       socket.emit('payback:save', payback);
+      // console.log('socket.emit payback:save', payback);
     }
   });
 }

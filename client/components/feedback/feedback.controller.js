@@ -34,13 +34,17 @@ angular.module('kulutApp')
     });
 
     socket.syncUpdates('payback', [], function(event, payback) {
+      // console.log('feedback socket.sync payback', payback);
       if (payback.recipient._id === currentUserId) {
         $scope.addAlert({ type: 'info', message: payback.author.name + ' made a new payback: ' + payback.amount + '€' });
       }
     });
 
     socket.syncUpdates('purchase', [], function(event, purchase) {
-      if (purchase.author._id !== currentUserId && purchase.participants.indexOf(currentUserId) > -1) {
+      // console.log('feedback socket.sync purchase', purchase);
+      if (purchase.author._id !== currentUserId && _.find(purchase.participants, function(user) {
+        return user._id === currentUserId;
+      })) {
         $scope.addAlert({ type: 'info', message: purchase.author.name + ' added a new purchase. ' + purchase.category.name + ': ' + purchase.amount + '€' });
       }
     });

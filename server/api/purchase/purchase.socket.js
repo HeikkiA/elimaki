@@ -19,6 +19,7 @@ function onSave(socket, doc, cb) {
   Purchase.findOne({ _id: doc._id }).populate('author').populate('category').populate('participants').exec(function (err, purchase) {
     if (!err) {
       socket.emit('purchase:save', purchase);
+      // console.log('socket.emit purchase:save', purchase);
     }
   });
 }
