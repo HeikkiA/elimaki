@@ -48,5 +48,6 @@ angular.module('kulutApp')
 
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('payback');
+      socket.unsyncUpdates('user');
     });
   });
