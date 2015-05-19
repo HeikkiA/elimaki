@@ -3,9 +3,12 @@
 var _ = require('lodash');
 var Payback = require('./payback.model');
 
+var authorQuery = { path: 'author', select: '_id name' };
+var recipientQuery = { path: 'recipient', select: '_id name' };
+
 // Get list of paybacks
 exports.index = function(req, res) {
-  Payback.find().populate('author').populate('recipient').exec(function (err, paybacks) {
+  Payback.find().populate(authorQuery).populate(recipientQuery).exec(function (err, paybacks) {
     if (err) {
       return handleError(res, err);
     }
@@ -75,7 +78,7 @@ exports.destroy = function(req, res) {
  */
 exports.sent = function(req, res, next) {
   var userId = req.params.userId;
-  Payback.find({ author: userId }).populate('recipient').exec(function(err, paybacks) {
+  Payback.find({ author: userId }).populate(recipientQuery).exec(function(err, paybacks) {
     if (err) {
       return handleError(res, err);
     }
@@ -88,7 +91,7 @@ exports.sent = function(req, res, next) {
  */
 exports.received = function(req, res, next) {
   var userId = req.params.userId;
-  Payback.find({ recipient: userId }).populate('author').populate('recipient').exec(function(err, paybacks) {
+  Payback.find({ recipient: userId }).populate(authorQuery).populate(recipientQuery).exec(function(err, paybacks) {
     if (err) {
       return handleError(res, err);
     }

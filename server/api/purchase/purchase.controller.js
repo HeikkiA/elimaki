@@ -3,9 +3,12 @@
 var _ = require('lodash');
 var Purchase = require('./purchase.model');
 
+var authorQuery = { path: 'author', select: '_id name' };
+var participantQuery = { path: 'participants', select: '_id name' };
+
 // Get list of purchases
 exports.index = function(req, res) {
-  Purchase.find().populate('author').populate('category').populate('participants').exec(function (err, purchases) {
+  Purchase.find().populate(authorQuery).populate('category').populate(participantQuery).exec(function (err, purchases) {
     if (err) {
       return handleError(res, err);
     }
@@ -77,7 +80,7 @@ exports.destroy = function(req, res) {
  */
 exports.made = function(req, res, next) {
   var userId = req.params.userId;
-  Purchase.find({ author: userId }).populate('category').populate('participants').exec(function(err, purchases) {
+  Purchase.find({ author: userId }).populate('category').populate(participantQuery).exec(function(err, purchases) {
     if (err) {
       return handleError(res, err);
     }
@@ -90,7 +93,7 @@ exports.made = function(req, res, next) {
  */
 exports.included = function(req, res, next) {
   var userId = req.params.userId;
-  Purchase.find({ participants: userId }).populate('author').populate('category').populate('participants').exec(function(err, purchases) {
+  Purchase.find({ participants: userId }).populate(authorQuery).populate('category').populate(participantQuery).exec(function(err, purchases) {
     if (err) {
       return handleError(res, err);
     }
