@@ -142,16 +142,40 @@ exports.stats = function(req, res, next) {
     }}
   ]).exec();
 
-  // purchases that include me
+  // purchases which include me
   var purchasesIncluded = Purchase.aggregate([
     { $match: {
       participants: userId
     }},
+
+    // mongodb 2.4 (current version in OpenShift) doesn't support $size
+    // { $group: {
+    //   _id: userId,
+    //   total: { $sum: { $divide: ['$amount', { $size: '$participants' }] } },
+    //   count: { $sum: 1 }
+    // }}
+
+    // mongodb 2.4 solution
+    // count participants size
+    { $unwind: '$participants' },
     { $group: {
-      _id: userId,
-      total: { $sum: { $divide: ['$amount', { $size: '$participants' }] } },
-      count: { $sum: 1 }
+        _id: '$_id',
+        amount: { $first: '$amount' },
+        count: { $sum: 1 }
+    }},
+    // count share in purchase
+    {  $group: {
+        _id: '$_id',
+        share: { $sum: { $divide: ['$amount', '$count'] } },
+        count: { $sum: 1 }
+    }},
+    // sum up
+    {  $group: {
+        _id: null,
+        total: { $sum: '$share' },
+        count: { $sum: 1 }
     }}
+
   ]).exec();
 
   // paybacks received
@@ -166,7 +190,7 @@ exports.stats = function(req, res, next) {
     }}
   ]).exec();
 
-  // paybacks send
+  // paybacks sent
   var paybacksSent = Payback.aggregate([
     { $match: {
       author: userId
