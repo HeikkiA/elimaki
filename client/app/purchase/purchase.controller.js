@@ -28,7 +28,7 @@ angular.module('elimakiApp')
     });
 
     $scope.selectAllParticipants = function() {
-      if ($scope.allSelected) {
+      if ($scope.newPurchase.allSelected) {
         $scope.newPurchase.participants = _.pluck($scope.users, '_id');
       } else {
         $scope.newPurchase.participants = [];
