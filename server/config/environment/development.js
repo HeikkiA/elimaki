@@ -8,5 +8,5 @@ module.exports = {
     uri: 'mongodb://localhost/elimaki-dev'
   },
 
-  seedDB: true
+  // seedDB: true
 };

@@ -21,5 +21,5 @@ module.exports = {
             'mongodb://localhost/elimaki'
   },
 
-  seedDB: true
+  // seedDB: true
 };
