@@ -7,6 +7,7 @@ angular.module('elimakiApp')
     $scope.users = [];
     $scope.sort = { by: 'name', reverse: false };
     $scope.isAdmin = Auth.isAdmin;
+    $scope.currentUserId = Auth.getCurrentUser()._id;
 
     $http.get('/api/users').success(function(users) {
       $scope.users = users;

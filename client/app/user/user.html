@@ -80,7 +80,7 @@
               <td ng-bind="user.realName"></td>
               <td ng-bind="user.email"></td>
               <td ng-bind="user.iban"></td>
-              <td ng-if="isAdmin()">
+              <td ng-if="isAdmin() && user._id !== currentUserId">
                 <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
               </td>
             </tr>

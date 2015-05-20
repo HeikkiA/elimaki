@@ -57,6 +57,9 @@ exports.show = function (req, res, next) {
  * restriction: 'admin'
  */
 exports.destroy = function(req, res) {
+  if ('' + req.user._id === req.params.id) {
+    return res.send(403, { message: "Users cannot delete themselves." });
+  }
   User.findByIdAndRemove(req.params.id, function(err, user) {
     if(err) return res.send(500, err);
     return res.send(204);
