@@ -1,19 +1,19 @@
-'use strict';
-
-var path = require('path');
-var _ = require('lodash');
+import path from 'path'
+import _ from 'lodash'
 
 function requiredProcessEnv(name) {
   if(!process.env[name]) {
-    throw new Error('You must set the ' + name + ' environment variable');
+    throw new Error(`You must set the ${name} environment variable`);
   }
   return process.env[name];
 }
 
+const env = process.env.NODE_ENV || 'production'
+
 // All configurations will extend these options
 // ============================================
-var all = {
-  env: process.env.NODE_ENV,
+const all = {
+  env: env,
 
   // Root path of server
   root: path.normalize(__dirname + '/../../..'),
@@ -47,4 +47,4 @@ var all = {
 // ==============================================
 module.exports = _.merge(
   all,
-  require('./' + process.env.NODE_ENV + '.js') || {});
+  require(`./${env}.js`) || {});
