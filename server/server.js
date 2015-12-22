@@ -11,12 +11,10 @@ import Promise from 'bluebird'
 import mongoose from 'mongoose'
 import config from './config/environment'
 
-import favicon from 'serve-favicon'
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
 import methodOverride from 'method-override'
 import cookieParser from 'cookie-parser'
-import errorHandler from 'errorhandler'
 import passport from 'passport'
 
 const fs = Promise.promisifyAll(require('fs'))
@@ -36,17 +34,7 @@ server.use(bodyParser.json())
 server.use(methodOverride())
 server.use(cookieParser())
 server.use(passport.initialize())
-
-if ('production' === process.env.NODE_ENV) {
-    server.use(favicon(path.join(config.root, 'public', 'favicon.ico')))
-    server.set('appPath', config.root + '/public')
-    server.use(morgan('dev'))
-} else {
-    server.use(require('connect-livereload')())
-    server.set('appPath', 'client')
-    server.use(morgan('dev'))
-    server.use(errorHandler()) // Error handler - has to be last
-}
+server.use(morgan('dev'))
 
 const cssFilePath = path.resolve(`${__dirname}/../.generated/style.css`)
 const bundleJsFilePath = path.resolve(`${__dirname}/../.generated/bundle.js`)
@@ -72,20 +60,26 @@ server.get('*', (req, res, next) => {
 const serveStaticResource = filePath => (req, res, next) => {
     checksumPromise(filePath)
         .then(checksum => {
-            if (req.query.checksum == checksum) {
-                const oneYearInSeconds = 60 * 60 * 24 * 356
-                res.setHeader('Cache-Control', `public, max-age=${oneYearInSeconds}`)
-                res.sendFile(filePath)
+            if (req.query.checksum) {
+                if (req.query.checksum == checksum) {
+                    const oneYearInSeconds = 60 * 60 * 24 * 356
+                    res.setHeader('Cache-Control', `public, max-age=${oneYearInSeconds}`)
+                    res.sendFile(filePath)
+                } else {
+                    res.status(404).send()
+                }
             } else {
-                res.status(404).send()
+                res.sendFile(filePath)
             }
         })
         .catch(next)
 }
 
 server.get('/style.css', serveStaticResource(cssFilePath))
-
 server.get('/bundle.js', serveStaticResource(bundleJsFilePath))
+server.get('/images/:name', (req, res, next) =>
+    serveStaticResource(path.resolve(`${__dirname}/../client/images/${req.params.name}`))(req, res, next)
+)
 
 const checksumPromise = filePath =>
     fs
