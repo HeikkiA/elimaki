@@ -11,9 +11,7 @@ import Promise from 'bluebird'
 import mongoose from 'mongoose'
 import config from './config/environment'
 
-import morgan from 'morgan'
 import bodyParser from 'body-parser'
-import methodOverride from 'method-override'
 import cookieParser from 'cookie-parser'
 import passport from 'passport'
 
@@ -31,10 +29,8 @@ const server = express()
 server.use(compression({threshold: 512}))
 server.use(bodyParser.urlencoded({ extended: false }))
 server.use(bodyParser.json())
-server.use(methodOverride())
 server.use(cookieParser())
 server.use(passport.initialize())
-server.use(morgan('dev'))
 
 const cssFilePath = path.resolve(`${__dirname}/../.generated/style.css`)
 const bundleJsFilePath = path.resolve(`${__dirname}/../.generated/bundle.js`)
