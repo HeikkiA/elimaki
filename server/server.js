@@ -26,6 +26,14 @@ if (config.seedDB) {
 }
 
 const server = express()
+// const httpServer = require('http').createServer(server)
+// const socketio = require('socket.io')(httpServer, {
+//   serveClient: (process.env.NODE_ENV === 'production') ? false : true,
+//   path: '/socket.io-client'
+// })
+// require('./config/socketio')(socketio)
+require('./routes')(server);
+
 server.use(compression({threshold: 512}))
 server.use(bodyParser.urlencoded({ extended: false }))
 server.use(bodyParser.json())
@@ -82,26 +90,16 @@ const checksumPromise = filePath =>
         .readFileAsync(filePath)
         .then(fileContent => crypto.createHash('md5').update(fileContent).digest('hex'))
 
-export const start = port => {
+export const start = () => {
     const reportPages = () => {
         pages.allPages.forEach(({pagePath}) => {
-            console.log(`Page available at http://localhost:${port}${pagePath}`.green)
+            console.log(`Page available at http://localhost:${config.port}${pagePath}`.green)
         })
     }
     return new Promise((resolve, reject) => {
-        server.listen(port, resolve)
+        server.listen(config.port, resolve)
+        // httpServer.listen(config.port, config.ip, () => {
+        //     console.log('Express server listening on %d, in %s mode', config.port, server.get('env'))
+        // })
     }).then(reportPages)
 }
-
-const httpServer = require('http').createServer(server)
-const socketio = require('socket.io')(httpServer, {
-  serveClient: (process.env.NODE_ENV === 'production') ? false : true,
-  path: '/socket.io-client'
-})
-require('./config/socketio')(socketio)
-httpServer.listen(config.port, config.ip, function () {
-  console.log('Express server listening on %d, in %s mode', config.port, server.get('env'))
-})
-
-// Expose app
-exports = module.exports = server

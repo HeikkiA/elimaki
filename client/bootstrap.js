@@ -1,3 +1,2 @@
 require('./augmentRuntime')
-
-require('../server/server')
+require('../server/server').start()
