@@ -7,7 +7,7 @@ var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 var _ = require('lodash');
-var Promise = require('node-promise');
+var Promise = require('bluebird');
 
 var validationError = function(res, err) {
   return res.json(422, err);
