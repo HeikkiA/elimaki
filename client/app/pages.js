@@ -1,5 +1,5 @@
 export const allPages = [
-    require('./frontPage')
+    require('./main/main')
 ]
 
 export const findPage = path =>
