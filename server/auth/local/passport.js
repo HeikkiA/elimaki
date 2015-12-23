@@ -1,26 +1,26 @@
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+import passport from 'passport'
+import {Strategy} from 'passport-local'
 
-exports.setup = function (User, config) {
-  passport.use(new LocalStrategy({
+exports.setup = (User, config) => {
+  passport.use(new Strategy({
       usernameField: 'email',
       passwordField: 'password' // this is the virtual field on the model
     },
-    function(email, password, done) {
+    (email, password, done) => {
       User.findOne({
         email: email.toLowerCase()
-      }, function(err, user) {
+      }, (err, user) => {
         if (err) {
-          return done(err);
+          return done(err)
         }
         if (!user) {
-          return done(null, false, { message: 'This email is not registered.', field: 'email' });
+          return done(null, false, { message: 'This email is not registered.', field: 'email' })
         }
         if (!user.authenticate(password)) {
-          return done(null, false, { message: 'This password is not correct.', field: 'password' });
+          return done(null, false, { message: 'This password is not correct.', field: 'password' })
         }
-        return done(null, user);
-      });
+        return done(null, user)
+      })
     }
-  ));
-};
+  ))
+}
