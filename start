@@ -19,5 +19,5 @@ else
     --include-path="app" \
     --ext scss &
 
-  node_modules/supervisor/lib/cli-wrapper.js --quiet --ignore node_modules --watch client client/bootstrap.js
+  node_modules/supervisor/lib/cli-wrapper.js --quiet --ignore node_modules --watch client,server client/bootstrap.js
 fi
