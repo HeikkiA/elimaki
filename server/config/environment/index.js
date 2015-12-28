@@ -8,7 +8,7 @@ function requiredProcessEnv(name) {
   return process.env[name];
 }
 
-const env = process.env.NODE_ENV || 'production'
+const env = process.env.NODE_ENV || 'development'
 
 // All configurations will extend these options
 // ============================================
