@@ -32,13 +32,14 @@ const server = express()
 //   path: '/socket.io-client'
 // })
 // require('./config/socketio')(socketio)
-require('./routes')(server);
 
 server.use(compression({threshold: 512}))
 server.use(bodyParser.urlencoded({ extended: false }))
 server.use(bodyParser.json())
 server.use(cookieParser())
 server.use(passport.initialize())
+
+require('./routes')(server)
 
 const cssFilePath = path.resolve(`${__dirname}/../.generated/style.css`)
 const bundleJsFilePath = path.resolve(`${__dirname}/../.generated/bundle.js`)
