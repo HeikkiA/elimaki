@@ -30,7 +30,9 @@ export const renderPage = applicationState =>
                     </div>
                     {
                         applicationState.loginFailed ?
-                            <div className="form-error">Login failed, please try again.</div>
+                            <div className="has-error">
+                                <span className="help-block">Login failed, please try again.</span>
+                            </div>
                             :
                             undefined
                     }
