@@ -1,5 +1,6 @@
 export const allPages = [
-    require('./main/main')
+    require('./main/main'),
+    require('./account/login')
 ]
 
 export const findPage = path =>
