@@ -1,19 +1,20 @@
 import express from 'express'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
-import basePage from '../client/app/basePage.js'
-import * as pages from '../client/app/pages.js'
 import path from 'path'
 import sass from 'node-sass'
 import compression from 'compression'
 import crypto from 'crypto'
 import Promise from 'bluebird'
 import mongoose from 'mongoose'
-import config from './config/environment'
-
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import passport from 'passport'
+import jwt from 'jsonwebtoken'
+
+import config from './config/environment'
+import basePage from '../client/app/basePage.js'
+import * as pages from '../client/app/pages.js'
 
 const fs = Promise.promisifyAll(require('fs'))
 
@@ -45,8 +46,13 @@ const cssFilePath = path.resolve(`${__dirname}/../.generated/style.css`)
 const bundleJsFilePath = path.resolve(`${__dirname}/../.generated/bundle.js`)
 
 server.get('*', (req, res, next) => {
-    const page = pages.findPage(req.url)
+    const session = req.cookies.token && jwt.verify(req.cookies.token, config.secrets.session)
+    console.log(session)
+
+    var page = pages.findPage(req.url)
     if (page) {
+        if (!(session && session._id) && req.url !== '/login')
+            return res.redirect('/login')
         Promise
             .all([checksumPromise(cssFilePath), checksumPromise(bundleJsFilePath)])
             .then(([cssChecksum, bundleJsChecksum]) => {
