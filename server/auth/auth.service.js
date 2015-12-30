@@ -53,7 +53,7 @@ const hasRole = roleRequired => {
  * Returns a jwt token signed by the app secret
  */
 const signToken = id =>
-  jwt.sign({ _id: id }, config.secrets.session, { expiresInMinutes: 60*5 })
+  jwt.sign({ _id: id }, config.secrets.session, { expiresIn: 60*60*5 })
 
 /**
  * Set token cookie directly for oAuth strategies
